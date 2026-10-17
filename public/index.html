@@ -17,6 +17,8 @@
   --red:#dc2626;--red-50:#fef2f2;--red-100:#fee2e2;
   --purple:#7c3aed;--purple-50:#f5f3ff;--purple-100:#ede9fe;
   --orange:#ea580c;--orange-50:#fff7ed;--orange-100:#ffedd5;
+  --pink:#db2777;--pink-50:#fdf2f8;--pink-100:#fce7f3;
+  --teal:#0d9488;--teal-50:#f0fdfa;--teal-100:#ccfbf1;
   --radius:12px;--radius-sm:8px;--radius-xs:6px;
   --shadow-sm:0 1px 2px rgba(0,0,0,.05);--shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
   --shadow-md:0 4px 12px rgba(0,0,0,.08);--shadow-lg:0 12px 40px rgba(0,0,0,.12);
@@ -92,6 +94,8 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
 .prog-fill.de{background:linear-gradient(90deg,#34d399,#059669)}
 .prog-fill.nn{background:linear-gradient(90deg,#a78bfa,#7c3aed)}
 .prog-fill.ds{background:linear-gradient(90deg,#fb923c,#ea580c)}
+.prog-fill.ai{background:linear-gradient(90deg,#f472b6,#db2777)}
+.prog-fill.dev{background:linear-gradient(90deg,#2dd4bf,#0d9488)}
 
 /* Sort dropdown */
 .sort-wrap{position:relative;margin-left:auto}
@@ -128,6 +132,9 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
 .ring-fill.de{stroke:var(--green)}
 .ring-fill.nn{stroke:var(--purple)}
 .ring-fill.ds{stroke:var(--orange)}
+.ring-fill.ai{stroke:var(--pink)}
+.ring-fill.dev{stroke:var(--teal)}
+
 .circ-val{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text-2)}
 .card-body{min-width:0}.card-top{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:5px}
 .tag{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:99px;font-size:11px;font-weight:600;line-height:1.5}
@@ -135,6 +142,9 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
 .tag-de{background:var(--green-100);color:var(--green)}
 .tag-nn{background:var(--purple-100);color:var(--purple)}
 .tag-ds{background:var(--orange-100);color:var(--orange)}
+.tag-ai{background:var(--pink-100);color:var(--pink)}
+.tag-dev{background:var(--teal-100);color:var(--teal)}
+
 .tag-cat{background:#f3f4f6;color:var(--text-2)}
 .tag-must{background:var(--green-100);color:var(--green)}.tag-imp{background:var(--amber-100);color:var(--amber)}.tag-adv{background:var(--red-100);color:var(--red)}
 .card-title{font-size:14px;font-weight:700;margin-bottom:3px;cursor:pointer;display:flex;align-items:center;gap:8px}
@@ -203,6 +213,7 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
 .bar{width:100%;max-width:34px;display:flex;flex-direction:column-reverse;border-radius:5px 5px 2px 2px;overflow:hidden;transition:height .5s cubic-bezier(.4,0,.2,1)}
 .bar.zero{height:3px!important;background:var(--border);border-radius:2px}
 .bs-da{background:var(--blue)}.bs-de{background:var(--green)}.bs-nn{background:var(--purple)}.bs-ds{background:var(--orange)}
+.bs-ai{background:var(--pink)}.bs-dev{background:var(--teal)}
 .bar-lbl{font-size:10px;color:var(--text-3);text-align:center;line-height:1.3;white-space:nowrap}
 .bar-col.is-today .bar-lbl{color:var(--blue);font-weight:700}
 .bar-col.future{opacity:.35}
@@ -441,15 +452,19 @@ var IC={
   close:'<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
   save:'<svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>',
   chart:'<svg viewBox="0 0 24 24"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>',
+  cpu:'<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>',
+  code:'<svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
   book_open:'<svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
 };
 
 // ★ Cấu hình track động — thêm track mới chỉ cần thêm vào đây
 var TRACK_CONFIG = {
-  'DA':       { label:'Data Analyst',  cls:'da', dot:'var(--blue)',   icon:'trend' },
-  'DE':       { label:'Data Engineer', cls:'de', dot:'var(--green)',  icon:'layers' },
-  'DS':       { label:'Data Scientist', cls:'ds', dot:'var(--orange)', icon:'chart' },
-  'Ngoại ngữ':{ label:'Ngoại ngữ',    cls:'nn', dot:'var(--purple)', icon:'bulb' }
+  'DA':       { label:'Data Analyst',   cls:'da',  dot:'var(--blue)',   icon:'trend' },
+  'DE':       { label:'Data Engineer',  cls:'de',  dot:'var(--green)',  icon:'layers' },
+  'DS':       { label:'Data Scientist', cls:'ds',  dot:'var(--orange)', icon:'chart' },
+  'Ngoại ngữ':{ label:'Ngoại ngữ',      cls:'nn',  dot:'var(--purple)', icon:'bulb' },
+  'AI':       { label:'AI',             cls:'ai',  dot:'var(--pink)',   icon:'cpu' },
+  'DEV':      { label:'Developer',      cls:'dev', dot:'var(--teal)',   icon:'code' }
 };
 
 function getTrackCls(track) {
