@@ -1,12 +1,13 @@
 /**
  * Giả lập google.script.run của Apps Script bằng fetch tới /api/<tênHàm>.
- * Nhờ file này, code trong index.html (bản cũ) chạy được mà không phải sửa từng chỗ gọi.
- *
  *   google.script.run.withSuccessHandler(ok).withFailureHandler(fail).tenHam(a, b)
  *   → POST /api/tenHam  body: [a, b]
  *
- * Khi lưu dữ liệu mà chưa có mật khẩu (hoặc sai), trang sẽ hỏi mật khẩu một lần
- * và ghi nhớ trong trình duyệt này.
+ * Quản trị:
+ *   isAdmin()     → true nếu trình duyệt này đã đăng nhập quản trị
+ *   loginAdmin()  → hỏi mật khẩu, kiểm tra với máy chủ
+ *   logoutAdmin() → đăng xuất
+ * Mỗi khi trạng thái đổi, phát sự kiện 'adminchange' trên window.
  */
 (function () {
   var PW_KEY = 'lotrinh_admin_pw';
@@ -16,6 +17,7 @@
   }
   function setPw(v) {
     try { v ? localStorage.setItem(PW_KEY, v) : localStorage.removeItem(PW_KEY); } catch (e) {}
+    try { window.dispatchEvent(new Event('adminchange')); } catch (e) {}
   }
 
   function call(name, args, retried) {
@@ -27,7 +29,7 @@
       return res.json().catch(function () { return null; }).then(function (data) {
         if (res.status === 401) {
           setPw('');
-          if (!retried) {
+          if (!retried && name !== 'checkAdmin') {
             var pw = window.prompt('Nhập mật khẩu quản trị để lưu thay đổi:');
             if (pw) { setPw(pw); return call(name, args, true); }
             throw new Error('Cần mật khẩu để lưu thay đổi');
@@ -62,6 +64,16 @@
   window.google = window.google || {};
   window.google.script = { get run() { return runner(); } };
 
-  // Gõ logoutAdmin() trong Console của trình duyệt để quên mật khẩu đã lưu
+  window.isAdmin = function () { return !!getPw(); };
   window.logoutAdmin = function () { setPw(''); };
+  // Trả về Promise<boolean>: true nếu đăng nhập thành công
+  window.loginAdmin = function () {
+    var pw = window.prompt('Nhập mật khẩu quản trị:');
+    if (!pw) return Promise.resolve(false);
+    setPw(pw);
+    return call('checkAdmin', [], true).then(
+      function () { return true; },
+      function () { setPw(''); window.alert('Sai mật khẩu'); return false; }
+    );
+  };
 })();

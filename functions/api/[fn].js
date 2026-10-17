@@ -277,8 +277,14 @@ async function saveLessonsBatch(db, roadmapId, lessons, deletedIds) {
   return saved;
 }
 
+// Kiểm tra mật khẩu quản trị (chỉ trả về true khi đúng mật khẩu)
+async function checkAdmin() {
+  return true;
+}
+
 // ══════════ ĐĂNG KÝ HÀM ══════════
 const HANDLERS = {
+  checkAdmin,
   getAllItems, addItem, updateItem, quickUpdate, deleteItem,
   getAllLessons, loadLessonsForItem, getLessonsForItems,
   updateLessonDates, saveLessonsBatch,
